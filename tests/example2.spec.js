@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 
 test.describe("Example", () => {
 
-  test("Testing Selectors", async ({ page }) => {
+  test("Testing Assertions", async ({ page }) => {
     await page.goto("https://demoqa.com/text-box");
     await page.locator('#userName').type('Capt.MacTavish');
     await page.locator("[placeholder='name@example.com']").type('captmactavish@sas.com');
