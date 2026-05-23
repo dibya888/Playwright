@@ -9,6 +9,22 @@ test.describe("Example", () => {
     await page.locator('//textarea[@placeholder="Current Address"]').type('Herefordshire, England');
     await page.locator('#permanentAddress').type('Herefordshire, England');
     await page.locator('button:has-text("Submit")').click();
-    await page.pause();
+
+
+    const name = page.locator('#name');
+    const email = page.locator('#email');
+    const currentAddress = page.locator('p#currentAddress');
+    const permanentAddress = page.locator('p#permanentAddress');
+
+    await expect(name).toBeVisible();
+    await expect(name).toHaveText('Name:Capt.MacTavish');
+    await expect(email).toBeVisible();
+    await expect(email).toHaveText('Email:captmactavish@sas.com');
+    await expect(currentAddress).toBeVisible();
+    await expect(currentAddress).toHaveText('Current Address :Herefordshire, England');
+    await expect(permanentAddress).toBeVisible();
+    await expect(permanentAddress).toHaveText('Permananet Address :Herefordshire, England');
+
+    await expect(page).toHaveTitle("demosite");
   })
 })
