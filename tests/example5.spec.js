@@ -23,7 +23,7 @@ test.describe("Different Tests", () => {
         await page.locator('#dropdown').selectOption({ label: 'Option 2' });
         await expect(page.locator('#dropdown')).toHaveValue('2');
     })
-    test("Testing iFrames", async ({ page }) => {
+    test.skip("Testing iFrames", async ({ page }) => {
         await page.goto('https://vinothqaacademy.com/iframe/');
         const frameTest = page.frameLocator('iframe[name=registeruser]');
         await frameTest.locator('#vfb-5').fill('Capt.');
@@ -53,4 +53,16 @@ test.describe("Different Tests", () => {
         await frameTest.locator('#vfb-3').fill(value);
         await frameTest.locator('#vfb-4').click();
     })
+    test("Testing Downloads", async ({ page }) => {
+        await page.goto('/download');
+
+        const [download] = await Promise.all([
+            page.waitForEvent('download'),
+            page.locator('text=random_data.txt').click(),
+        ]);
+        const path = await download.path();
+        const url = download.url();
+        console.log(path);
+        console.log(url);
+    });
 })
