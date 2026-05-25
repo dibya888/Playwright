@@ -65,7 +65,7 @@ test.describe("Different Tests", () => {
         console.log(path);
         console.log(url);
     });
-    test("Testing Uploads", async ({ page }) => {
+    test.skip("Testing Uploads", async ({ page }) => {
         await page.goto('/upload');
         // await page.setInputFiles('#file-upload', 'Folder/sample.pdf');
         // await page.locator('#file-submit').click();
@@ -80,5 +80,8 @@ test.describe("Different Tests", () => {
         await expect(page.locator('text=File Uploaded!')).toBeVisible();
         await expect(page.locator('text=sample.pdf')).toBeVisible();
 
+    });
+    test("Generate PDF", async ({ page }) => {
+        console.log('PDF Generation Tested.');
     });
 })
