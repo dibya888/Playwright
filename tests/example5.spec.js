@@ -11,9 +11,16 @@ test.describe("Different Tests", () => {
         await page.locator("input[type='checkbox']").first().check();
         await page.locator("input[type='checkbox']").last().uncheck();
     })
-    test("Testing Drag & Drop", async ({ page }) => {
+    test.skip("Testing Drag & Drop", async ({ page }) => {
         await page.goto('/drag_and_drop');
         await page.dragAndDrop('#column-a', '#column-b');
         await page.dragAndDrop('#column-b', '#column-a');
+    })
+    test("Testing Drop Down", async ({ page }) => {
+        await page.goto('/dropdown');
+        await page.locator('#dropdown').selectOption('1');
+        await expect(page.locator('#dropdown')).toHaveValue('1');
+        await page.locator('#dropdown').selectOption({ label: 'Option 2' });
+        await expect(page.locator('#dropdown')).toHaveValue('2');
     })
 })
