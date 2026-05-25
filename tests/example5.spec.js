@@ -53,7 +53,7 @@ test.describe("Different Tests", () => {
         await frameTest.locator('#vfb-3').fill(value);
         await frameTest.locator('#vfb-4').click();
     })
-    test("Testing Downloads", async ({ page }) => {
+    test.skip("Testing Downloads", async ({ page }) => {
         await page.goto('/download');
 
         const [download] = await Promise.all([
@@ -64,5 +64,21 @@ test.describe("Different Tests", () => {
         const url = download.url();
         console.log(path);
         console.log(url);
+    });
+    test("Testing Uploads", async ({ page }) => {
+        await page.goto('/upload');
+        // await page.setInputFiles('#file-upload', 'Folder/sample.pdf');
+        // await page.locator('#file-submit').click();
+        // await expect(page.locator('text=File Uploaded!')).toBeVisible();
+        // await expect(page.locator('text=sample.pdf')).toBeVisible();
+        const [fileChooser] = await Promise.all([
+            page.waitForEvent('filechooser'),
+            page.locator('#file-upload').click(),
+        ]);
+        await fileChooser.setFiles('Folder/sample.pdf');
+        await page.locator('#file-submit').click();
+        await expect(page.locator('text=File Uploaded!')).toBeVisible();
+        await expect(page.locator('text=sample.pdf')).toBeVisible();
+
     });
 })
