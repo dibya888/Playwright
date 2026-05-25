@@ -81,7 +81,21 @@ test.describe("Different Tests", () => {
         await expect(page.locator('text=sample.pdf')).toBeVisible();
 
     });
-    test("Generate PDF", async ({ page }) => {
+    test.skip("Generate PDF", async ({ page }) => {
         console.log('PDF Generation Tested.');
+    });
+    test("Testing Hovering", async ({ page }) => {
+        await page.goto('/hovers');
+        await page.locator('.figure').nth(0).hover();
+        await expect(page.locator('.figure').nth(0).locator('h5')).toHaveText('name: user1');
+        await page.locator('.figure').nth(0).locator('text=View profile').click();
+        await page.goBack();
+        await page.locator('.figure').nth(1).hover();
+        await expect(page.locator('.figure').nth(1).locator('h5')).toHaveText('name: user2');
+        await page.locator('.figure').nth(1).locator('text=View profile').click();
+        await page.goBack();
+        await page.locator('.figure').nth(2).hover();
+        await expect(page.locator('.figure').nth(2).locator('h5')).toHaveText('name: user3');
+        await page.locator('.figure').nth(2).locator('text=View profile').click();
     });
 })
