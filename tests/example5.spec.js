@@ -6,24 +6,24 @@ test.describe("Different Tests", () => {
         await page.goto('https://the-internet.herokuapp.com/');
     })
 
-    test.skip("Testing Checkbox", async ({ page }) => {
+    test("Testing Checkbox", async ({ page }) => {
         await page.goto('/checkboxes');
         await page.locator("input[type='checkbox']").first().check();
         await page.locator("input[type='checkbox']").last().uncheck();
     })
-    test.skip("Testing Drag & Drop", async ({ page }) => {
+    test("Testing Drag & Drop", async ({ page }) => {
         await page.goto('/drag_and_drop');
         await page.dragAndDrop('#column-a', '#column-b');
         await page.dragAndDrop('#column-b', '#column-a');
     })
-    test.skip("Testing Drop Down", async ({ page }) => {
+    test("Testing Drop Down", async ({ page }) => {
         await page.goto('/dropdown');
         await page.locator('#dropdown').selectOption('1');
         await expect(page.locator('#dropdown')).toHaveValue('1');
         await page.locator('#dropdown').selectOption({ label: 'Option 2' });
         await expect(page.locator('#dropdown')).toHaveValue('2');
     })
-    test.skip("Testing iFrames", async ({ page }) => {
+    test("Testing iFrames", async ({ page }) => {
         await page.goto('https://vinothqaacademy.com/iframe/');
         const frameTest = page.frameLocator('iframe[name=registeruser]');
         await frameTest.locator('#vfb-5').fill('Capt.');
@@ -53,7 +53,7 @@ test.describe("Different Tests", () => {
         await frameTest.locator('#vfb-3').fill(value);
         await frameTest.locator('#vfb-4').click();
     })
-    test.skip("Testing Downloads", async ({ page }) => {
+    test("Testing Downloads", async ({ page }) => {
         await page.goto('/download');
 
         const [download] = await Promise.all([
@@ -65,7 +65,7 @@ test.describe("Different Tests", () => {
         console.log(path);
         console.log(url);
     });
-    test.skip("Testing Uploads", async ({ page }) => {
+    test("Testing Uploads", async ({ page }) => {
         await page.goto('/upload');
         // await page.setInputFiles('#file-upload', 'Folder/sample.pdf');
         // await page.locator('#file-submit').click();
@@ -81,7 +81,7 @@ test.describe("Different Tests", () => {
         await expect(page.locator('text=sample.pdf')).toBeVisible();
 
     });
-    test.skip("Generate PDF", async ({ page }) => {
+    test("Generate PDF", async ({ page }) => {
         console.log('PDF Generation Tested.');
     });
     test("Testing Hovering", async ({ page }) => {
