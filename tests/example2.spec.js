@@ -2,6 +2,10 @@ const { test, expect } = require('@playwright/test');
 
 test.describe("Example", () => {
 
+  test.use({
+    viewport: { width: 600, height: 9000 }
+  })
+
   test("Testing Assertions", async ({ page }) => {
     await page.goto("https://demoqa.com/text-box");
     await page.locator('#userName').type('Capt.MacTavish');
